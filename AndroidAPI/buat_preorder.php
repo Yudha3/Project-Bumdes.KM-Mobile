@@ -90,7 +90,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' ) {
     $timezone = time() + (60 * 60 * 7);
     $date = gmdate('Y-m-d H:i:s', $timezone);
 
-    $no = mysqli_query($conn, "SELECT id_preorder FROM preorder order by id_preorder desc ");
+    $no = mysqli_query($conn, "SELECT id_preorder FROM preorder order by id_preorder DESC LIMIT 1 ");
     $idtran = mysqli_fetch_array($no);
     $kode = isset($idtran['id_preorder']) ? $idtran['id_preorder'] : '';
 // $kode = $idtran['id_transaksi'];
