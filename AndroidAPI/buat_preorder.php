@@ -142,8 +142,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' ) {
             $subtotal = $item['subtotal'];
 
             $insert = mysqli_query($conn, "INSERT INTO item_preorder (id_preorder, id_brg, qty, subtotal) VALUES ('$format', '$id_barang', '$qty', '$subtotal' )");
-            
-             $update = mysqli_query($conn, "UPDATE data_brg SET jml_stok = jml_stok - '$qty' WHERE id_brg = '$id_barang'");
         }
 
         $delete = mysqli_query($conn, "DELETE FROM keranjang WHERE id_user = '$id_user' AND jenis = 'PREORDER'");
