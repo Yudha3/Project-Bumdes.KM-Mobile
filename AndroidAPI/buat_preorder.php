@@ -128,7 +128,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' ) {
     $total_bayar = $totalBelanja + $ongkir;
 
     $queryTransaksi = mysqli_query($conn, "INSERT INTO preorder (id_preorder, tgl_preorder, id_user, penerima, alamat, no_telp, id_ongkir, total_preorder, status) 
-        VALUES ('$format',$date', '$id_user', '$penerima', '$alamat', '$no_telp', '$id_ongkir', '$total_bayar', 'MENUNGGU PEMBAYARAN')");
+        VALUES ('$format',$date', '$id_user', '$penerima', '$alamat', '$no_telp', '$id_ongkir', '$total_bayar', 'Menunggu Konfirmasi')");
     $cek = mysqli_affected_rows($conn);
     // $current_id = $conn->insert_id;
     // $getX = mysqli_fetch_assoc(mysqli_query($conn, "SELECT * FROM preorder WHERE id_user = '$id_user' ORDER BY id_preorder DESC LIMIT 1"));
