@@ -5,7 +5,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   if ($conn) {
     $id_user = $_POST['id_user'];
 
-    $ambilKeranjang = mysqli_query($conn, "SELECT * FROM keranjang WHERE id_user = '$id_user' AND jenis = 'ORDER'");
+    $ambilKeranjang = mysqli_query($conn, "SELECT * FROM keranjang WHERE id_user = '$id_user' AND jenis = 'PREORDER'");
     $totalBelanja =0;
       while ($getKeranjang = mysqli_fetch_assoc($ambilKeranjang)) {
           $subtotal = $getKeranjang["subtotal"];

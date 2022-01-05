@@ -2,7 +2,7 @@
 
 require("config.php");
 
-$query_insert = "SELECT * FROM data_brg";
+$query_insert = "SELECT * FROM data_brg ORDER BY barang ASC";
 $result = mysqli_query($conn, $query_insert);
 $cek = mysqli_affected_rows($conn);
 

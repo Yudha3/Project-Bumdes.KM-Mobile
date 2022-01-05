@@ -15,7 +15,10 @@
 
         // cek email
         $query_check = "SELECT * FROM users WHERE email = '$email'";
-        $check_email = mysqli_fetch_array(mysqli_query($conn, $query_check));    
+        $check_email = mysqli_fetch_array(mysqli_query($conn, $query_check));  
+
+        $query_check = "SELECT * FROM users WHERE username = '$username'";
+        $check_username = mysqli_fetch_array(mysqli_query($conn, $query_check));    
         
         // cek no_telp
         $query_check = "SELECT * FROM users WHERE no_telp = '$no_telp'";
@@ -24,15 +27,20 @@
         $json_array = array();
         $response = "";
 
-        if (isset($check_email)) {
+        if (isset($check_username)) {
             $response = array(
                 'kode' => 404,
-                'pesan' => 'Email sudah terdaftar!'
+                'pesan' => 'Username terdaftar'
+            );
+        } else if (isset($check_email)) {
+            $response = array(
+                'kode' => 404,
+                'pesan' => 'Email terdaftar'
             );
         } else if (isset($check_no_telp)) {
             $response = array(
                 'kode' => 404,
-                'pesan' => 'Nomor telepon sudah terdaftar!'
+                'pesan' => 'Nomor telepon terdaftar'
             );
         } else {
             $encryptedPassword = password_hash($password, PASSWORD_DEFAULT);

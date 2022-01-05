@@ -21,7 +21,7 @@ if ($_SERVER["REQUEST_METHOD"] == 'POST') {
     //     $response = array('pesan'=>'BERHASIL');} else {$response = array('pesan'=>'GAGAL');}
     // } else {
     
-    $queryInsert = mysqli_query($conn, "INSERT INTO keranjang (id_user, id_barang, qty, subtotal, jenis) VALUES ('$id_user', '$id_brg', '$intQty', '$subtotal', 'ORDER')");
+    $queryInsert = mysqli_query($conn, "INSERT INTO keranjang (id_user, id_barang, qty, subtotal, jenis) VALUES ('$id_user', '$id_brg', '$intQty', '$subtotal', 'PREORDER')");
 
     if ($queryInsert) {
       $response = array('pesan'=>'BERHASIL');
