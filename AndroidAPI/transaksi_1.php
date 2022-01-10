@@ -74,9 +74,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' ) {
     // $date = date("Y-m-d H:i:s");
     // $total_belanja = $_POST['total_belanja'];
     $no = mysqli_query($conn, "SELECT id_transaksi FROM transaksi order by id_transaksi DESC LIMIT 1");
+    if (mysqli_num_rows($no) > 0) {
     $idtran = mysqli_fetch_array($no);
-    $kode = isset($idtran['id_transaksi']) ? $idtran['id_transaksi'] : '';
-
+    // $kode = isset($idtran['id_transaksi']) ? $idtran['id_transaksi'] : '';
+    $kode = $idtran['id_transaksi'];
+    } else {
+        $format = "TRK-" . date("m") . date("y") . "001";
+    }
 
     $urut = substr($kode, 8, 3);
     $tambah = (int) $urut + 1;
