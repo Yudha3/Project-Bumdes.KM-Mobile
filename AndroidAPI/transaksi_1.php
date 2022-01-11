@@ -73,14 +73,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' ) {
     $date = gmdate('Y-m-d H:i:s', $timezone);
     // $date = date("Y-m-d H:i:s");
     // $total_belanja = $_POST['total_belanja'];
-    $no = mysqli_query($conn, "SELECT id_transaksi FROM transaksi order by id_transaksi DESC LIMIT 1");
+    $no = mysqli_query($conn, "SELECT id_transaksi FROM transaksi DESC LIMIT 1");
     if (mysqli_num_rows($no) > 0) {
     $idtran = mysqli_fetch_array($no);
     // $kode = isset($idtran['id_transaksi']) ? $idtran['id_transaksi'] : '';
     $kode = $idtran['id_transaksi'];
-    } else {
-        $format = "TRK-" . date("m") . date("y") . "001";
-    }
 
     $urut = substr($kode, 8, 3);
     $tambah = (int) $urut + 1;
@@ -88,12 +85,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' ) {
     $tahun = date("y");
     $day = date("d");
 
-    if (strlen($tambah) == 1) {
-        $format = "TRK-" . $bulan . $tahun . "00" . $tambah;
-    } else if (strlen($tambah) == 2) {
-         $format = "TRK-" . $bulan . $tahun . "0" . $tambah;
+        if (strlen($tambah) == 1) {
+            $format = "TRK-" . $bulan . $tahun . "00" . $tambah;
+        } else if (strlen($tambah) == 2) {
+            $format = "TRK-" . $bulan . $tahun . "0" . $tambah;
+        } else {
+            $format = "TRK-" . $bulan . $tahun . $tambah;
+        }
     } else {
-        $format = "TRK-" . $bulan . $tahun . $tambah;
+        $format = "TRK-" . date("m") . date("y") . "001";
     }
     
     $ambilKeranjang = mysqli_query($conn, "SELECT * FROM keranjang WHERE id_user = '$id_user' AND jenis = 'ORDER' ");
