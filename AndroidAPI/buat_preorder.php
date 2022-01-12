@@ -10,7 +10,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' ) {
     $timezone = time() + (60 * 60 * 7);
     $date = gmdate('Y-m-d H:i:s', $timezone);
 
-    $no = mysqli_query($conn, "SELECT id_preorder FROM preorder desc limit 1 ");
+    $no = mysqli_query($conn, "SELECT id_preorder FROM preorder ORDER BY id_preorder desc limit 1 ");
     if (mysqli_num_rows($no) > 0) {
     $idtran = mysqli_fetch_array($no);
     // $kode = isset($idtran['id_preorder']) ? $idtran['id_preorder'] : '';
@@ -23,14 +23,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' ) {
     $day = date("d");
 
         if (strlen($tambah) == 1) {
-            $format = "PRE-" . $bulan . $tahun . "00" . $tambah;
+            $format = "PRE-" . $tahun . $bulan . "00" . $tambah;
         } else if (strlen($tambah) == 2) {
-            $format = "PRE-" . $bulan . $tahun . "0" . $tambah;
+            $format = "PRE-" . $tahun . $bulan . "0" . $tambah;
         } else {
-            $format = "PRE-" . $bulan . $tahun . $tambah;
+            $format = "PRE-" . $tahun . $bulan . $tambah;
         }
     } else {
-        $format = "PRE-" . date("m") . date("y") . "001";
+        $format = "PRE-" . date("y") . date("m") . "001";
     }
     
     $ambilKeranjang = mysqli_query($conn, "SELECT * FROM keranjang WHERE id_user = '$id_user' AND jenis = 'PREORDER'");
