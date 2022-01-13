@@ -18,6 +18,7 @@ if ($cek > 0){
         $F["jml_stok"] = $ambil->jml_stok;
         $F["gambar"] = $ambil->gambar;
         $F["deskripsi"] = $ambil->deskripsi;
+        $F["jml_terjual"] = $ambil->jml_terjual;
         
         array_push($response["data"], $F);
     }

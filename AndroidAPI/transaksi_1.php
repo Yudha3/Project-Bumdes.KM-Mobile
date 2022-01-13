@@ -129,7 +129,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' ) {
 
             $insert = mysqli_query($conn, "INSERT INTO transaksi_produk (id_transaksi, id_brg, qty, subtotal) VALUES ('$format', '$id_barang', '$qty', '$subtotal' )");
             
-             $update = mysqli_query($conn, "UPDATE data_brg SET jml_stok = jml_stok - '$qty' WHERE id_brg = '$id_barang'");
+            $update = mysqli_query($conn, "UPDATE data_brg SET jml_stok = jml_stok - '$qty', jml_terjual = jml_terjual + '$qty' WHERE id_brg = '$id_barang'");
         }
 
         $delete = mysqli_query($conn, "DELETE FROM keranjang WHERE jenis = 'ORDER'  AND id_user = '$id_user' ");

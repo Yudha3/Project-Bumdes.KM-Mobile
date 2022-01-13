@@ -67,8 +67,9 @@ if ($cek > 0){
            $stok = $rows['jml_stok'];
            $deskripsi = $rows['deskripsi'];
            $gambar = $rows['gambar'];
+           $jml_terjual = $rows['jml_terjual'];
 
-           $response = array('pesan'=>$pesan, 'id_brg' => $id_brg, 'barang' => $barang, 'harga' => $harga, 'stok' => $stok, 'deskripsi' => $deskripsi, 'gambar' => $gambar);
+           $response = array('pesan'=>$pesan, 'id_brg' => $id_brg, 'barang' => $barang, 'harga' => $harga, 'stok' => $stok, 'deskripsi' => $deskripsi, 'gambar' => $gambar, 'jml_terjual' => $jml_terjual);
     
 } else {
     $response = array('pesan'=>'TIDAK ADA');
