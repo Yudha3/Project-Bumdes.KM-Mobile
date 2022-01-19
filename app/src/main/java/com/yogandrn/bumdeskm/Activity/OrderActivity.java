@@ -105,6 +105,7 @@
             }
         });
 
+        rgOngkir.check(R.id.id_ongkir_1);
         txtSubtotal.setText(formatRupiah(subtotalitem));
         txtSubtotal2.setText(formatRupiah(subtotalitem));
         txtTotal.setText(formatRupiah(subtotalitem+ongkir));
@@ -202,7 +203,7 @@
                 String pesan = response.body().getPesan();
 
                 if (pesan.equals("BERHASIL")) {
-                    int id_transaksi = response.body().getId_transaksi();
+                    String id_transaksi = response.body().getId_transaksi();
                     vOrder.setVisibility(View.GONE);pbOrder.setVisibility(View.GONE);
                     Toast.makeText(getApplicationContext(), "Transaksi Berhasil", Toast.LENGTH_SHORT).show();
                     Intent selesai = new Intent(OrderActivity.this, PertunjukBayarActivity.class);

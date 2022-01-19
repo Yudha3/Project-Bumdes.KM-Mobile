@@ -93,7 +93,9 @@ public class KeranjangActivity extends AppCompatActivity {
             public void onClick(View view) {
                 pbKeranjang.setVisibility(View.VISIBLE);
                 Intent order = new Intent(KeranjangActivity.this, OrderActivity.class);
+                order.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NO_HISTORY);
                 startActivity(order); pbKeranjang.setVisibility(View.GONE);
+                finish();
             }
         });
 

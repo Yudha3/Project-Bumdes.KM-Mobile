@@ -1,8 +1,8 @@
 package com.yogandrn.bumdeskm.Model;
 
 public class ResponseDetailTransaksi {
-    private int id_ongkir, id_transaksi, id_user, total_transaksi;
-    private String  tgl_transaksi, status, alamat, penerima, resi, no_telp;
+    private int id_ongkir,  id_user, total_transaksi;
+    private String  id_transaksi, tgl_transaksi, status, alamat, penerima, resi, no_telp;
 
     public int getId_ongkir() {
         return id_ongkir;
@@ -16,11 +16,11 @@ public class ResponseDetailTransaksi {
         this.id_ongkir = id_ongkir;
     }
 
-    public int getId_transaksi() {
+    public String getId_transaksi() {
         return id_transaksi;
     }
 
-    public void setId_transaksi(int id_transaksi) {
+    public void setId_transaksi(String id_transaksi) {
         this.id_transaksi = id_transaksi;
     }
 

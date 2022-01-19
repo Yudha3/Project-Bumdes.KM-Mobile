@@ -134,6 +134,18 @@ public interface APIRequestData {
     );
 
     @FormUrlEncoded
+    @POST("hapus_transaksi.php")
+    Call<ResponseModel> hapusTransaksi(
+            @Field("id_transaksi") String id_transaksi
+    );
+
+    @FormUrlEncoded
+    @POST("hapus_preorder.php")
+    Call<ResponseModel> hapusPreorder(
+            @Field("id_preorder") String id_preorder
+    );
+
+    @FormUrlEncoded
     @POST("get_list_transaksi.php")
     Call<ResponseTransaksi> readTransaksi(
             @Field("id_user") String id_user
@@ -189,8 +201,19 @@ public interface APIRequestData {
         @Field("id_transaksi") String id_transaksi
     );
 
+    @FormUrlEncoded
+    @POST("beri_ulasan.php")
+    Call<ResponseModel> kirimUlasan(
+        @Field("id_user") String id_user,
+        @Field("id_transaksi") String id_transaksi,
+        @Field("ulasan") String ulasan
+    );
+
     @GET ("retrieve.php")
     Call<ResponseProduk> ReadData();
+
+    @GET ("produk_terlaris.php")
+    Call<ResponseProduk> penawaranTerbaik();
 
     @FormUrlEncoded
     @POST("search_item.php")

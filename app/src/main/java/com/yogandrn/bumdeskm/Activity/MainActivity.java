@@ -52,18 +52,17 @@ public class MainActivity extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         getSupportActionBar().hide();
 
-        btnSearch = (ImageView) findViewById(R.id.btn_search);
-        etSearch = (EditText) findViewById(R.id.et_searchbar);
-        ic_keranjang = (ImageView) findViewById(R.id.keranjang_main);
-        imgProfil = (CircleImageView) findViewById(R.id.img_profil_main);
-        btnKatalog = (LinearLayout) findViewById(R.id.layoutKatalog);
-        btnKeranjang = (LinearLayout) findViewById(R.id.layoutKeranjang);
-        btnPesanan = (LinearLayout) findViewById(R.id.layoutPesanan);
-        btnPreorder = (LinearLayout) findViewById(R.id.layoutPreorder);
-        txtWelcome = (TextView) findViewById(R.id.txtuser_main);
-        btnHeadline1 = (TextView) findViewById(R.id.btn_headline1);
-        btnHeadline2 = (TextView) findViewById(R.id.btn_headline2);
-        srlMainmenu = findViewById(R.id.srl_main_menu);
+        btnSearch = findViewById(R.id.btn_search);
+        etSearch =  findViewById(R.id.et_searchbar);
+        ic_keranjang =  findViewById(R.id.keranjang_main);
+        imgProfil =  findViewById(R.id.img_profil_main);
+        btnKatalog =  findViewById(R.id.layoutKatalog);
+        btnKeranjang =  findViewById(R.id.layoutKeranjang);
+        btnPesanan =  findViewById(R.id.layoutPesanan);
+        btnPreorder = findViewById(R.id.layoutPreorder);
+        txtWelcome = findViewById(R.id.txtuser_main);
+        btnHeadline1 = findViewById(R.id.btn_headline1);
+        btnHeadline2 =  findViewById(R.id.btn_headline2);
         pbMainmenu= findViewById(R.id.progress_main_menu);
         floatingButtonChat = findViewById(R.id.btn_hubungi_kami);
 
@@ -73,14 +72,14 @@ public class MainActivity extends AppCompatActivity {
         }
         getUserData();
 
-        srlMainmenu.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                srlMainmenu.setRefreshing(true);
-                getUserData();
-                srlMainmenu.setRefreshing(false);
-            }
-        });
+//        srlMainmenu.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+//            @Override
+//            public void onRefresh() {
+//                srlMainmenu.setRefreshing(true);
+//                getUserData();
+//                srlMainmenu.setRefreshing(false);
+//            }
+//        });
 
         btnSearch.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -156,7 +155,7 @@ public class MainActivity extends AppCompatActivity {
         btnHeadline1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent produk = new Intent(MainActivity.this, KatalogActivity.class);
+                Intent produk = new Intent(MainActivity.this, PenawaranTerbaik.class);
                 startActivity(produk);
             }
         });
@@ -173,8 +172,8 @@ public class MainActivity extends AppCompatActivity {
     public void moveToLogin() {
         Intent intent = new Intent(MainActivity.this, WelcomeScreen.class);
 //        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NO_HISTORY);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
         finish();
     }

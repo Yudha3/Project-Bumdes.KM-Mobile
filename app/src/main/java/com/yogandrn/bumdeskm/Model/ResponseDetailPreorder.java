@@ -1,8 +1,8 @@
 package com.yogandrn.bumdeskm.Model;
 
 public class ResponseDetailPreorder {
-    private int id_preorder, id_user, id_ongkir, total_preorder;
-    private String tgl_preorder, penerima, alamat, no_telp, status, pesan;
+    private int  id_user, id_ongkir, total_preorder;
+    private String id_preorder, tgl_preorder, penerima, alamat, no_telp, status, pesan;
 
     public String getPesan() {
         return pesan;
@@ -12,11 +12,11 @@ public class ResponseDetailPreorder {
         this.pesan = pesan;
     }
 
-    public int getId_preorder() {
+    public String getId_preorder() {
         return id_preorder;
     }
 
-    public void setId_preorder(int id_preorder) {
+    public void setId_preorder(String id_preorder) {
         this.id_preorder = id_preorder;
     }
 

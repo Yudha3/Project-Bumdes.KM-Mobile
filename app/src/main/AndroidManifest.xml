@@ -12,8 +12,14 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_me_round"
         android:supportsRtl="true"
-        android:usesCleartextTraffic="true"
-        android:theme="@style/Theme.Coba2">
+        android:theme="@style/Theme.Coba2"
+        android:usesCleartextTraffic="true">
+        <activity
+            android:name=".Activity.BeriUlasan"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.PenawaranTerbaik"
+            android:exported="false" />
         <activity
             android:name=".Activity.Splashscreen"
             android:exported="true">

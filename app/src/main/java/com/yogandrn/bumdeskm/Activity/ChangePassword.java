@@ -66,11 +66,11 @@ public class ChangePassword extends AppCompatActivity {
                     if(motionEvent.getRawX() >= etPassword.getRight()-etPassword.getCompoundDrawables()[Right].getBounds().width()){
                         int selection = etPassword.getSelectionEnd();
                         if (passwordVisible) {
-                            etPassword.setCompoundDrawablesRelativeWithIntrinsicBounds(0,0, R.drawable.ic_visibility, 0);
+                            etPassword.setCompoundDrawablesRelativeWithIntrinsicBounds(0,0, R.drawable.ic_visibility_grey, 0);
                             etPassword.setTransformationMethod(PasswordTransformationMethod.getInstance());
                             passwordVisible= false;
                         } else {
-                            etPassword.setCompoundDrawablesRelativeWithIntrinsicBounds(0,0, R.drawable.ic_visibility_off, 0);
+                            etPassword.setCompoundDrawablesRelativeWithIntrinsicBounds(0,0, R.drawable.ic_visibility_grey_off, 0);
                             etPassword.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
                             passwordVisible= true;
                         }
@@ -90,11 +90,11 @@ public class ChangePassword extends AppCompatActivity {
                     if(motionEvent.getRawX() >= etConfPass.getRight()-etConfPass.getCompoundDrawables()[Right].getBounds().width()){
                         int selection = etConfPass.getSelectionEnd();
                         if (passwordVisible) {
-                            etConfPass.setCompoundDrawablesRelativeWithIntrinsicBounds(0,0, R.drawable.ic_visibility, 0);
+                            etConfPass.setCompoundDrawablesRelativeWithIntrinsicBounds(0,0, R.drawable.ic_visibility_grey, 0);
                             etConfPass.setTransformationMethod(PasswordTransformationMethod.getInstance());
                             passwordVisible= false;
                         } else {
-                            etConfPass.setCompoundDrawablesRelativeWithIntrinsicBounds(0,0, R.drawable.ic_visibility_off, 0);
+                            etConfPass.setCompoundDrawablesRelativeWithIntrinsicBounds(0,0, R.drawable.ic_visibility_grey_off, 0);
                             etConfPass.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
                             passwordVisible= true;
                         }

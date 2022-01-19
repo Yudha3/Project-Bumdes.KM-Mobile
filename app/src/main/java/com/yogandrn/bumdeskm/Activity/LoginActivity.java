@@ -158,6 +158,8 @@ public class LoginActivity extends AppCompatActivity {
                     gb.getTotal(String.valueOf(sessionManager.getSessionID()));
 
                     Intent login = new Intent(LoginActivity.this, MainActivity.class);
+                    login.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    login.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
                     vLoading.setVisibility(View.INVISIBLE);
                     loading.setVisibility(View.INVISIBLE);
                     startActivity(login);

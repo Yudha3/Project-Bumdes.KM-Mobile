@@ -117,7 +117,7 @@
         <View
             android:layout_width="12dp"
             android:layout_height="12dp"
-            android:layout_marginTop="2dp"
+            android:layout_marginTop="3dp"
             android:background="@drawable/bg_buttton_green"
             android:visibility="visible"/>
 
@@ -141,7 +141,7 @@
             <View
                 android:layout_width="12dp"
                 android:layout_height="12dp"
-                android:layout_marginTop="2dp"
+                android:layout_marginTop="3dp"
                 android:background="@drawable/bg_buttton_green_rounded"
                 android:visibility="visible"/>
 
@@ -165,7 +165,7 @@
             <View
                 android:layout_width="12dp"
                 android:layout_height="12dp"
-                android:layout_marginTop="2dp"
+                android:layout_marginTop="3dp"
                 android:background="@drawable/bg_buttton_green_rounded"
                 android:visibility="visible"/>
 
@@ -189,7 +189,7 @@
             <View
                 android:layout_width="12dp"
                 android:layout_height="12dp"
-                android:layout_marginTop="2dp"
+                android:layout_marginTop="3dp"
                 android:background="@drawable/bg_buttton_green_rounded"
                 android:visibility="visible"/>
 
@@ -213,7 +213,7 @@
             <View
                 android:layout_width="12dp"
                 android:layout_height="12dp"
-                android:layout_marginTop="2dp"
+                android:layout_marginTop="3dp"
                 android:background="@drawable/bg_buttton_green_rounded"
                 android:visibility="visible"/>
 
@@ -237,7 +237,7 @@
             <View
                 android:layout_width="12dp"
                 android:layout_height="12dp"
-                android:layout_marginTop="2dp"
+                android:layout_marginTop="3dp"
                 android:background="@drawable/bg_buttton_green_rounded"
                 android:visibility="visible"/>
 

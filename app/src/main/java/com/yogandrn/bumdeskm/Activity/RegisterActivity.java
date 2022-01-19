@@ -89,11 +89,11 @@ public class RegisterActivity extends AppCompatActivity {
                     if(motionEvent.getRawX() >= txtConfpass.getRight()-txtConfpass.getCompoundDrawables()[Right].getBounds().width()){
                         int selection = txtConfpass.getSelectionEnd();
                         if (passwordVisible) {
-                            txtConfpass.setCompoundDrawablesRelativeWithIntrinsicBounds(0,0, R.drawable.ic_visibility_grey, 0);
+                            txtConfpass.setCompoundDrawablesRelativeWithIntrinsicBounds(0,0, R.drawable.ic_visibility, 0);
                             txtConfpass.setTransformationMethod(PasswordTransformationMethod.getInstance());
                             passwordVisible= false;
                         } else {
-                            txtConfpass.setCompoundDrawablesRelativeWithIntrinsicBounds(0,0, R.drawable.ic_visibility_grey_off, 0);
+                            txtConfpass.setCompoundDrawablesRelativeWithIntrinsicBounds(0,0, R.drawable.ic_visibility_off, 0);
                             txtConfpass.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
                             passwordVisible= true;
                         }

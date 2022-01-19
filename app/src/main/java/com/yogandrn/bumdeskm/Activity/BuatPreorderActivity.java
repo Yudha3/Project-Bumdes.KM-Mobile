@@ -100,6 +100,7 @@ public class BuatPreorderActivity extends AppCompatActivity {
         txtOngkir.setText(formatRupiah(ongkir));
         txtOngkir2.setText(formatRupiah(ongkir));
         rvOrder.setLayoutManager(layoutManager);
+        rgOngkir.check(R.id.id_ongkir_01);
 
         getItem();
 
@@ -224,6 +225,7 @@ public class BuatPreorderActivity extends AppCompatActivity {
                     Intent selesai = new Intent(BuatPreorderActivity.this, PetunjukPreorderActivity.class);
 //                    selesai.putExtra("id_transaksi", String.valueOf(id_transaksi));
 //                    selesai.putExtra("total", subtotalitem + ongkir);
+                    selesai.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NO_HISTORY);
                     startActivity(selesai);
                     finish();
                 } else if (pesan.equals("GAGAL")) {

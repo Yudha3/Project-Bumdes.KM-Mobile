@@ -17,6 +17,7 @@
     <style name="Theme.Coba2.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+        <item name="statusBarBackground">@color/primaryGreen</item>
     </style>
 
     <style name="Theme.Coba2.AppBarOverlay" parent="ThemeOverlay.AppCompat.ActionBar" />

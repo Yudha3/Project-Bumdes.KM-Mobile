@@ -25,8 +25,8 @@ public class PertunjukBayarActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pertunjuk_bayar);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        getSupportActionBar().hide();
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        setTitle("Petunjuk Pembayaran");
 
         Bundle data = getIntent().getExtras();
         id_transaksi = data.getString("id_transaksi");
@@ -42,6 +42,7 @@ public class PertunjukBayarActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent bayar = new Intent(PertunjukBayarActivity.this, BayarActivity.class);
                 bayar.putExtra("id_transaksi", id_transaksi);
+                bayar.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NO_HISTORY);
                 startActivity(bayar);
                 finish();
             }

@@ -22,6 +22,7 @@
         android:layout_width="wrap_content"
         android:layout_height="42dp"
         android:layout_gravity="center"
+        android:layout_marginTop="28dp"
         android:src="@drawable/logobumdes"
         android:visibility="visible"/>
 
@@ -268,7 +269,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="18sp"
-        android:layout_marginBottom="96dp"
+        android:layout_marginBottom="72dp"
         android:text="Sudah punya akun? Login"
         android:textColor="#6e6e6e"
         android:fontFamily="@font/leaguespartan_bold"

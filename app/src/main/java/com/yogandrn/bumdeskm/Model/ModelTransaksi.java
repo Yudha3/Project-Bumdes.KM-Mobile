@@ -1,14 +1,14 @@
 package com.yogandrn.bumdeskm.Model;
 
 public class ModelTransaksi {
-    private int  id_transaksi, total_transaksi;
-    private String  gambar, penerima, alamat, no_telp, status, tgl_transaksi;
+    private int   total_transaksi;
+    private String  id_transaksi, gambar, penerima, alamat, no_telp, status, tgl_transaksi;
 
-    public int getId_transaksi() {
+    public String getId_transaksi() {
         return id_transaksi;
     }
 
-    public void setId_transaksi(int id_transaksi) {
+    public void setId_transaksi(String id_transaksi) {
         this.id_transaksi = id_transaksi;
     }
 

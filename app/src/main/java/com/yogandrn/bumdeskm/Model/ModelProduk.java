@@ -2,7 +2,7 @@ package com.yogandrn.bumdeskm.Model;
 
 public class ModelProduk {
 
-    private int  hg_jual, jml_stok ;
+    private int  hg_jual, jml_stok, jml_terjual;
     private String barang, deskripsi, gambar, id_brg;
 
     public String getId_brg() {
@@ -43,6 +43,14 @@ public class ModelProduk {
 
     public void setDeskripsi(String deskripsi) {
         this.deskripsi = deskripsi;
+    }
+
+    public int getJml_terjual() {
+        return jml_terjual;
+    }
+
+    public void setJml_terjual(int jml_terjual) {
+        this.jml_terjual = jml_terjual;
     }
 
     public String getGambar() {

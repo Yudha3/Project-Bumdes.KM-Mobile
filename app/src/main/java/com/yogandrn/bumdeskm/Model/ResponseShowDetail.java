@@ -1,7 +1,7 @@
 package com.yogandrn.bumdeskm.Model;
 
 public class ResponseShowDetail {
-  private int harga, qty, stok;
+  private int harga, qty, stok, jml_terjual;
   private String pesan, barang, deskripsi, gambar;
 
   public int getHarga() {
@@ -58,5 +58,13 @@ public class ResponseShowDetail {
 
   public void setGambar(String gambar) {
     this.gambar = gambar;
+  }
+
+  public int getJml_terjual() {
+    return jml_terjual;
+  }
+
+  public void setJml_terjual(int jml_terjual) {
+    this.jml_terjual = jml_terjual;
   }
 }

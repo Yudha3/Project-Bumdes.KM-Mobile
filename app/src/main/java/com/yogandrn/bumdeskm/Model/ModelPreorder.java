@@ -1,14 +1,14 @@
 package com.yogandrn.bumdeskm.Model;
 
 public class ModelPreorder {
-    private int id_preorder, total_preorder, id_user, id_ongkir;
-    private String tgl_preorder, penerima, alamat, no_telp, gambar, status;
+    private int  total_preorder, id_user, id_ongkir;
+    private String id_preorder, tgl_preorder, penerima, alamat, no_telp, gambar, status;
 
-    public int getId_preorder() {
+    public String getId_preorder() {
         return id_preorder;
     }
 
-    public void setId_preorder(int id_preorder) {
+    public void setId_preorder(String id_preorder) {
         this.id_preorder = id_preorder;
     }
 

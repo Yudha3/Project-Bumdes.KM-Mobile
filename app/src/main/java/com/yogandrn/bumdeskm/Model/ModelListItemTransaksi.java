@@ -1,8 +1,8 @@
 package com.yogandrn.bumdeskm.Model;
 
 public class ModelListItemTransaksi {
-    private int id_transaksi, id_transaksi_produk,  subtotal, harga, qty;
-    private String barang, gambar,  id_brg ;
+    private int  id_transaksi_produk,  subtotal, harga, qty;
+    private String id_transaksi, barang, gambar,  id_brg ;
 
     public int getId_transaksi_produk() {
         return id_transaksi_produk;
@@ -12,11 +12,11 @@ public class ModelListItemTransaksi {
         this.id_transaksi_produk = id_transaksi_produk;
     }
 
-    public int getId_transaksi() {
+    public String getId_transaksi() {
         return id_transaksi;
     }
 
-    public void setId_transaksi(int id_transaksi) {
+    public void setId_transaksi(String id_transaksi) {
         this.id_transaksi = id_transaksi;
     }
 

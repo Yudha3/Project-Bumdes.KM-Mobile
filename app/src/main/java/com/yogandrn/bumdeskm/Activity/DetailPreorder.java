@@ -1,5 +1,7 @@
 package com.yogandrn.bumdeskm.Activity;
 
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
@@ -8,6 +10,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -19,6 +22,7 @@ import com.yogandrn.bumdeskm.Adapter.AdapterItemPreorder;
 import com.yogandrn.bumdeskm.Global;
 import com.yogandrn.bumdeskm.Model.ModelListItemPreorder;
 import com.yogandrn.bumdeskm.Model.ResponseDetailPreorder;
+import com.yogandrn.bumdeskm.Model.ResponseModel;
 import com.yogandrn.bumdeskm.Model.ResponsePreorder;
 import com.yogandrn.bumdeskm.R;
 import com.yogandrn.bumdeskm.SessionManager;
@@ -33,7 +37,7 @@ import retrofit2.Response;
 public class DetailPreorder extends AppCompatActivity {
 
     private TextView txtStatus, txtID, txtTgl, txtAlamat, txtPenerima, txtNoTelp, txtTotal, txtSubtotal, txtResi, txtOngkir, txtPengiriman;
-    private Button btnBack;
+    private Button btnBack, btnHapus;
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager layoutManager;
@@ -64,6 +68,7 @@ public class DetailPreorder extends AppCompatActivity {
         txtOngkir = findViewById(R.id.txt_ongkir_detail_preorder);
         recyclerView = findViewById(R.id.rvDetailPreorder);
         btnBack = findViewById(R.id.btn_back_preorder);
+        btnHapus = findViewById(R.id.btn_hapus_preorder);
         srlDetailPreorder = findViewById(R.id.srl_detail_preorder);
         pbDetailPreorder = findViewById(R.id.progress_detail_preorder);
 
@@ -86,6 +91,29 @@ public class DetailPreorder extends AppCompatActivity {
             }
         });
 
+        btnHapus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AlertDialog.Builder dialogConfirm = new AlertDialog.Builder(view.getContext());
+                dialogConfirm.setCancelable(true);
+                dialogConfirm.setTitle("Hapus Preorder");
+                dialogConfirm.setMessage("Apakah Anda yakin ingin menghapus transaksi ini dari daftar pesanan preorder?");
+                dialogConfirm.setPositiveButton("Hapus", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        hapusPreorder();
+                    }
+                });
+                dialogConfirm.setNegativeButton("Batal", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.dismiss();
+                    }
+                });
+                dialogConfirm.show();
+            }
+        });
+
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -93,6 +121,36 @@ public class DetailPreorder extends AppCompatActivity {
             }
         });
 
+    }
+
+    private void hapusPreorder() {
+        pbDetailPreorder.setVisibility(View.VISIBLE);
+        APIRequestData apiRequestData = RetroServer.koneksiRetrofit().create(APIRequestData.class);
+        Call<ResponseModel> callHapus = apiRequestData.hapusPreorder(id_preorder);
+        callHapus.enqueue(new Callback<ResponseModel>() {
+            @Override
+            public void onResponse(Call<ResponseModel> call, Response<ResponseModel> response) {
+                String pesan = response.body().getPesan();
+                if (pesan.equals("BERHASIL")) {
+                    pbDetailPreorder.setVisibility(View.GONE);
+                    Toast.makeText(DetailPreorder.this, "Data transaksi berhasil dihapus", Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(DetailPreorder.this, PreorderActivity.class));
+                    finish();
+                } else if (pesan.equals("GAGAL")) {
+                    pbDetailPreorder.setVisibility(View.GONE);
+                    Toast.makeText(DetailPreorder.this, "Gagal menghapus pesanan", Toast.LENGTH_SHORT).show();
+                } else if (pesan.equals("NOT CONNECTED")) {
+                    pbDetailPreorder.setVisibility(View.GONE);
+                    Toast.makeText(DetailPreorder.this, "Terjadi kesalahan saat menghubungi server", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseModel> call, Throwable throwable) {
+                pbDetailPreorder.setVisibility(View.VISIBLE);
+                Toast.makeText(DetailPreorder.this, "Terjadi kesalahan :\n" + throwable.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     private void getDetailPreorder() {
@@ -103,7 +161,7 @@ public class DetailPreorder extends AppCompatActivity {
             @Override
             public void onResponse(Call<ResponseDetailPreorder> call, Response<ResponseDetailPreorder> response) {
                 String tgl = response.body().getTgl_preorder();
-                int id_pre = response.body().getId_preorder();
+                String id_pre = response.body().getId_preorder();
                 int id_ongkir = response.body().getId_ongkir();
                 int id_user = response.body().getId_user();
                 int total = response.body().getTotal_preorder();
@@ -111,6 +169,12 @@ public class DetailPreorder extends AppCompatActivity {
                 String alamat = response.body().getAlamat();
                 String no_telp = response.body().getNo_telp();
                 String status = response.body().getStatus();
+
+                if (status.equals("Ditolak")) {
+                    btnHapus.setVisibility(View.VISIBLE);
+                } else {
+                    btnBack.setVisibility(View.VISIBLE);
+                }
 
                 if (id_ongkir == 1) {
                     txtOngkir.setText("Rp 30.000");

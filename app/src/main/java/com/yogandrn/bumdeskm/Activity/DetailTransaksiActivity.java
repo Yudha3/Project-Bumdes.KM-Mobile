@@ -37,7 +37,7 @@ import retrofit2.Response;
 public class DetailTransaksiActivity extends AppCompatActivity {
 
     private TextView txtStatus, txtID, txtTgl, txtAlamat, txtPenerima, txtNoTelp, txtTotal, txtSubtotal, txtResi, txtOngkir, txtPengiriman;
-    private Button btnKonfirmasi, btnBayar;
+    private Button btnKonfirmasi, btnBayar, btnHapus;
     private RecyclerView rvDetailPesanan;
     private RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager layoutManager;
@@ -72,6 +72,7 @@ public class DetailTransaksiActivity extends AppCompatActivity {
         rvDetailPesanan = findViewById(R.id.rvDetailTransaksi);
         btnKonfirmasi = findViewById(R.id.btn_konfirmasi_detail);
         btnBayar = findViewById(R.id.btn_bayar_detail);
+        btnHapus = findViewById(R.id.btn_hapus_transaksi);
         srlDetailTransaksi = findViewById(R.id.srl_detail_transaksi);
         pbDetailTransaksi = findViewById(R.id.progress_detail_transaksi);
 
@@ -105,14 +106,26 @@ public class DetailTransaksiActivity extends AppCompatActivity {
         btnKonfirmasi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Intent konfirmasi = new Intent(DetailTransaksiActivity.this, BeriUlasan.class);
+                konfirmasi.putExtra("id_transaksi", id_transaksi);
+                konfirmasi.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                konfirmasi.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(konfirmasi);
+                finish();
+            }
+        });
+
+        btnHapus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
                 AlertDialog.Builder dialogConfirm = new AlertDialog.Builder(view.getContext());
                 dialogConfirm.setCancelable(true);
-                dialogConfirm.setTitle("Konfirmasi Pesanan");
-                dialogConfirm.setMessage("Apakah Anda yakin untuk melakukan konfirmasi pesanan?");
-                dialogConfirm.setPositiveButton("Konfirmasi", new DialogInterface.OnClickListener() {
+                dialogConfirm.setTitle("Hapus Pesanan");
+                dialogConfirm.setMessage("Apakah Anda yakin ingin menghapus transaksi ini dari daftar pesanan?");
+                dialogConfirm.setPositiveButton("Hapus", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        confirmOrder();
+                        hapusTransaksi();
                     }
                 });
                 dialogConfirm.setNegativeButton("Batal", new DialogInterface.OnClickListener() {
@@ -134,7 +147,7 @@ public class DetailTransaksiActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<ResponseDetailTransaksi> call, Response<ResponseDetailTransaksi> response) {
                 String tgl = response.body().getTgl_transaksi();
-                int id_trx = response.body().getId_transaksi();
+                String id_trx = response.body().getId_transaksi();
                 int id_ongkir = response.body().getId_ongkir();
                 int id_user = response.body().getId_user();
                 int total = response.body().getTotal_transaksi();
@@ -167,6 +180,8 @@ public class DetailTransaksiActivity extends AppCompatActivity {
                 } else if (status.equals("Selesai")){
                     btnKonfirmasi.setVisibility(View.GONE);
                     btnBayar.setVisibility(View.GONE);
+                } else if (status.equals("Ditolak")) {
+                    btnHapus.setVisibility(View.VISIBLE);
                 }else{
                     btnKonfirmasi.setVisibility(View.VISIBLE);
                     btnBayar.setVisibility(View.GONE);
@@ -215,22 +230,24 @@ public class DetailTransaksiActivity extends AppCompatActivity {
         });
     }
 
-    private void confirmOrder() {
+
+
+    private void hapusTransaksi() {
         pbDetailTransaksi.setVisibility(View.VISIBLE);
         APIRequestData apiRequestData = RetroServer.koneksiRetrofit().create(APIRequestData.class);
-        Call<ResponseModel> callKonfirmasi = apiRequestData.konfirmasiPesanan(id_transaksi);
-        callKonfirmasi.enqueue(new Callback<ResponseModel>() {
+        Call<ResponseModel> callHapus = apiRequestData.hapusTransaksi(id_transaksi);
+        callHapus.enqueue(new Callback<ResponseModel>() {
             @Override
             public void onResponse(Call<ResponseModel> call, Response<ResponseModel> response) {
                 String pesan = response.body().getPesan();
                 if (pesan.equals("BERHASIL")) {
                     pbDetailTransaksi.setVisibility(View.GONE);
-                    Toast.makeText(DetailTransaksiActivity.this, "Pesanan Selesai", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(DetailTransaksiActivity.this, "Data transaksi telah dihapus", Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(DetailTransaksiActivity.this, ListPesanan.class));
                     finish();
                 } else if (pesan.equals("GAGAL")) {
                     pbDetailTransaksi.setVisibility(View.GONE);
-                    Toast.makeText(DetailTransaksiActivity.this, "Gagal melakukan konfirmasi", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(DetailTransaksiActivity.this, "Gagal menghapus transaksi", Toast.LENGTH_SHORT).show();
                 } else if (pesan.equals("NOT CONNECTED")) {
                     pbDetailTransaksi.setVisibility(View.GONE);
                     Toast.makeText(DetailTransaksiActivity.this, "Gagal menghubungi server", Toast.LENGTH_SHORT).show();

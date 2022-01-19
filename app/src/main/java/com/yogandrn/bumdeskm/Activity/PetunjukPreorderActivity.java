@@ -28,7 +28,9 @@ public class PetunjukPreorderActivity extends AppCompatActivity {
         btnOK.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(PetunjukPreorderActivity.this, PreorderActivity.class));
+                Intent selesai = new Intent(PetunjukPreorderActivity.this, PreorderActivity.class);
+                selesai.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NO_HISTORY);
+                startActivity(selesai);
                 finish();
             }
         });

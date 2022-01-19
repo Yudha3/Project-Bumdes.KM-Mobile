@@ -101,9 +101,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' ) {
     
     
     $totalBelanja =0;
+    $untung = 0;
     while ($getKeranjang = mysqli_fetch_assoc($ambilKeranjang)) {
         $subtotal = $getKeranjang["subtotal"];
-        $totalBelanja += $subtotal;
+        $idb = $getKeranjang["id_barang"];
+        $qtyA = $getKeranjang["qty"];
+        $getLaba = mysqli_fetch_assoc(mysqli_query($conn, "SELECT * FROM data_brg WHERE id_brg = '$idb'"));
+        $laba = ($getLaba['hg_jual'] - $getLaba['hg_beli']) * $qtyA;
+        $totalBelanja += $subtotal; 
+        $untung += $laba;
     } 
 
     if ($id_ongkir == 1) {
@@ -133,7 +139,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' ) {
         }
 
         $delete = mysqli_query($conn, "DELETE FROM keranjang WHERE jenis = 'ORDER'  AND id_user = '$id_user' ");
-        $response = array('pesan'=>'BERHASIL', 'total'=>$total_bayar);
+        $response = array('pesan'=>'BERHASIL', 'total'=>$total_bayar, 'untung' => $untung);
         
     } elseif (!$queryTransaksi) {
         $response = array('pesan'=>'GAGAL', 'total'=>$total_bayar);

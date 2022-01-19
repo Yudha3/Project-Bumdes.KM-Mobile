@@ -84,12 +84,14 @@
                 android:visibility="visible">
 
                 <RadioButton
+                    android:id="@+id/rd_laki"
                     android:layout_width="wrap_content"
                     android:layout_height="36dp"
                     android:buttonTint="@color/primaryGreen"
                     android:text="Laki-laki" />
 
                 <RadioButton
+                    android:id="@+id/rd_perempuan"
                     android:layout_width="wrap_content"
                     android:layout_height="36dp"
                     android:layout_marginStart="12dp"

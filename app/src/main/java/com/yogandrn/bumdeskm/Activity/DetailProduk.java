@@ -37,6 +37,7 @@ public class DetailProduk extends AppCompatActivity {
     private TextView txtharga;
     private TextView txtdeskripsi;
     private TextView txtstok;
+    private TextView txtjmlterjual;
     private TextView btnPlus;
     private TextView btnMin;
     private TextView qtyProduk;
@@ -47,7 +48,7 @@ public class DetailProduk extends AppCompatActivity {
     private ImageView img_produk;
     private List<ModelProduk> listData;
     private String id_barang, barang, deskripsi, gambar;
-    private int stok, harga;
+    private int stok, harga, jml_terjual;
     private int subtotal = 0;
     private SwipeRefreshLayout srlDetail;
     private ProgressBar pbDetail;
@@ -70,6 +71,7 @@ public class DetailProduk extends AppCompatActivity {
         txtharga = (TextView) findViewById(R.id.tv_harga_detail);
         txtstok = (TextView) findViewById(R.id.tv_stok_detail);
         txtdeskripsi = (TextView) findViewById(R.id.tv_deskripsi_detail);
+        txtjmlterjual = (TextView) findViewById(R.id.tv_jml_terjual);
         add = (Button) findViewById(R.id.btn_add_to_cart);
         preorder = (Button) findViewById(R.id.btn_add_preorder);
         increment = (Button) findViewById(R.id.btn_increment);
@@ -139,6 +141,7 @@ public class DetailProduk extends AppCompatActivity {
                     harga = response.body().getHarga();
                     deskripsi = response.body().getDeskripsi();
                     gambar = response.body().getGambar();
+                    jml_terjual = response.body().getJml_terjual();
 
                     if (stok == 0) {
                         preorder.setVisibility(View.VISIBLE);
@@ -154,6 +157,7 @@ public class DetailProduk extends AppCompatActivity {
                     txtharga.setText(formatRupiah(harga));
                     txtstok.setText("Stok : " + stok);
                     txtdeskripsi.setText(deskripsi);
+                    txtjmlterjual.setText(String.valueOf(jml_terjual) + " Terjual");
                     setTitle(barang);
                     pbDetail.setVisibility(View.GONE);
                 }else if (pesan.equals("TIDAK ADA")){

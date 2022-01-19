@@ -52,7 +52,7 @@ public class ListPesanan extends AppCompatActivity {
 
 //        sessionManager = new SessionManager(ListPesanan.this);
 
-        txtEmpty = (TextView) findViewById(R.id.txt_empty_pesanan);
+        txtEmpty =  findViewById(R.id.txt_empty_pesanan);
         btnBelanja = findViewById(R.id.btnBelanja_pesanan);
         btnBack = findViewById(R.id.btnBack_pesanan);
         pbTransaksi = findViewById(R.id.progress_list_pesanan);

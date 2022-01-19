@@ -118,7 +118,9 @@ public class FragmentKeranjangPreorder extends Fragment {
         btnPreorder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getContext(), BuatPreorderActivity.class));
+                Intent selesai = new Intent(getContext(), BuatPreorderActivity.class);
+                selesai.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NO_HISTORY);
+                startActivity(selesai); getActivity().finish();
             }
         });
 

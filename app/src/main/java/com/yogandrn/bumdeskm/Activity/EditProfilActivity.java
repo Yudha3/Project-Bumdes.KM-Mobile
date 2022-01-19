@@ -39,6 +39,7 @@ public class EditProfilActivity extends AppCompatActivity {
     private TextView btnChoose;
     private EditText etFullname, etEmail, etNoTelp;
     private RadioGroup radioKelamin;
+    private RadioButton rdLaki, rdPerempuan;
     private ProgressBar pbEdit;
     private SwipeRefreshLayout srlEdit;
     private String email, fullname, no_telp;
@@ -60,11 +61,14 @@ public class EditProfilActivity extends AppCompatActivity {
         etEmail = findViewById(R.id.et_email_edit);
         etFullname = findViewById(R.id.et_fullname_edit);
         etNoTelp = findViewById(R.id.et_notelp_edit);
-        radioKelamin = (RadioGroup) findViewById(R.id.radio_jkelamin_edit);
+        radioKelamin = findViewById(R.id.radio_jkelamin_edit);
+        rdLaki = findViewById(R.id.rd_laki);
+        rdPerempuan = findViewById(R.id.rd_perempuan);
         pbEdit = findViewById(R.id.progress_edit);
         srlEdit = findViewById(R.id.srl_edit_profil);
 
         getUserData();
+        radioKelamin.check(R.id.rd_laki);
 
         srlEdit.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
