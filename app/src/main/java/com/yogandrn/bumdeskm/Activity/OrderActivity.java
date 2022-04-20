@@ -24,6 +24,7 @@
  import com.yogandrn.bumdeskm.Global;
  import com.yogandrn.bumdeskm.Model.ModelKeranjang;
  import com.yogandrn.bumdeskm.Model.ResponseKeranjang;
+ import com.yogandrn.bumdeskm.Model.ResponseOngkir;
  import com.yogandrn.bumdeskm.Model.ResponseTransaksi;
  import com.yogandrn.bumdeskm.R;
  import com.yogandrn.bumdeskm.SessionManager;
@@ -43,13 +44,14 @@
      private RecyclerView.Adapter adapter;
      private RecyclerView.LayoutManager layoutManager;
      private List<ModelKeranjang> listitem = new ArrayList<>();
-     private Button btnOrder;
+     private Button btnOrder, btnCekOngkir;
      private RadioGroup rgOngkir, rgBayar;
      private RadioButton ongkir1, ongkir2;
-     private TextView txtTotal, txtSubtotal, txtOngkir, txtTotal2, txtSubtotal2, txtOngkir2;
-     private EditText etPenerima, etAlamat, etNoTelp;
+     private TextView txtTotal, txtSubtotal, txtOngkir, txtTotal2, txtSubtotal2, txtOngkir2, txtEstimasi;
+     private EditText etPenerima, etAlamat, etNoTelp, etKodePos;
      private int subtotalitem ;
-     private int ongkir = 30000;
+     private int ongkir;
+     private String kodepos, estimasi;
      private String id_ongkir = "1";
      private String penerima, alamat, no_telp;
      private SwipeRefreshLayout srlOrder;
@@ -73,17 +75,20 @@
         txtSubtotal = findViewById(R.id.txt_total_item);
         txtSubtotal2 = findViewById(R.id.txt_total2_item);
         txtOngkir = findViewById(R.id.txt_ongkir_order);
+        txtEstimasi = findViewById(R.id.txt_estimasi);
         txtOngkir2 = findViewById(R.id.txt_ongkir2_order);
         txtTotal = findViewById(R.id.txt_total_order);
         txtTotal2 = findViewById(R.id.txt_total2_order);
         etPenerima = findViewById(R.id.et_penerima_transaksi);
         etAlamat = findViewById(R.id.et_alamat_transaksi);
         etNoTelp = findViewById(R.id.et_notelp_transaksi);
+        etKodePos = findViewById(R.id.et_kodepos);
         rgOngkir = findViewById(R.id.radioGroup_ongkir);
         rgBayar = findViewById(R.id.radioGroup_bayar);
         ongkir1 = findViewById(R.id.id_ongkir_1);
         ongkir2 = findViewById(R.id.id_ongkir_2);
         btnOrder = findViewById(R.id.btn_transaksi);
+        btnCekOngkir = findViewById(R.id.btn_cek_ongkir);
         pbOrder = findViewById(R.id.progress_order);
         srlOrder = findViewById(R.id.srl_order);
         vOrder = findViewById(R.id.view_order);
@@ -105,7 +110,7 @@
             }
         });
 
-        rgOngkir.check(R.id.id_ongkir_1);
+//        rgOngkir.check(R.id.id_ongkir_1);
         txtSubtotal.setText(formatRupiah(subtotalitem));
         txtSubtotal2.setText(formatRupiah(subtotalitem));
         txtTotal.setText(formatRupiah(subtotalitem+ongkir));
@@ -133,6 +138,20 @@
                     txtOngkir2.setText(formatRupiah(48000));
                     txtTotal2.setText(formatRupiah(subtotalitem+48000));
                     txtTotal.setText(formatRupiah(subtotalitem+48000));
+                }
+            }
+        });
+
+        btnCekOngkir.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (etKodePos.getText().equals("")){
+                    etKodePos.setError("Kode Pos Wajib Diisi");
+                } else if (etKodePos.getText().length() < 6) {
+                    etKodePos.setError("Kode Pos tidak valid");
+                } else {
+                    kodepos = etKodePos.getText().toString();
+                    cekOngkir();
                 }
             }
         });
@@ -227,6 +246,26 @@
             }
         });
     }
+
+    private void cekOngkir() {
+         String id = String.valueOf(sessionManager.getSessionID());
+         APIRequestData apiRequestData = RetroServer.koneksiRetrofit().create(APIRequestData.class);
+         Call<ResponseOngkir> callOngkir = apiRequestData.cekOngkir(id, kodepos);
+         callOngkir.enqueue(new Callback<ResponseOngkir>() {
+             @Override
+             public void onResponse(Call<ResponseOngkir> call, Response<ResponseOngkir> response) {
+                 ongkir = response.body().getOngkir();
+                 estimasi = response.body().getEstimasi();
+                 txtOngkir.setText(formatRupiah(ongkir));
+                 txtEstimasi.setText(estimasi + " hari");
+             }
+
+             @Override
+             public void onFailure(Call<ResponseOngkir> call, Throwable t) {
+                 Toast.makeText(getApplicationContext(), "Terjadi kesalahan :\n" + t.getMessage(), Toast.LENGTH_SHORT).show();
+             }
+         });
+     }
 
      private String formatRupiah(int number) {
          Locale localeID = new Locale("IND", "ID");
