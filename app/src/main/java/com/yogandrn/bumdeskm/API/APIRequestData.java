@@ -4,6 +4,7 @@ import com.yogandrn.bumdeskm.Model.ResponseDetailPreorder;
 import com.yogandrn.bumdeskm.Model.ResponseDetailTransaksi;
 import com.yogandrn.bumdeskm.Model.ResponseKeranjang;
 import com.yogandrn.bumdeskm.Model.ResponseModel;
+import com.yogandrn.bumdeskm.Model.ResponseOngkir;
 import com.yogandrn.bumdeskm.Model.ResponsePreorder;
 import com.yogandrn.bumdeskm.Model.ResponseProduk;
 import com.yogandrn.bumdeskm.Model.ResponseShowDetail;
@@ -234,5 +235,12 @@ public interface APIRequestData {
             @Field("id_user") String id_user,
             @Field("old_password") String old_password,
             @Field("new_password") String new_password
+    );
+
+    @FormUrlEncoded
+    @POST("cek_ongkir.php")
+    Call<ResponseOngkir> cekOngkir(
+            @Field("id_user") String id_user,
+            @Field("kode_pos") String kode_post
     );
 }
