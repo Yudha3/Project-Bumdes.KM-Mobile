@@ -202,22 +202,60 @@
                 android:orientation="vertical"
                 android:background="#FFF">
 
-    <TextView
-        android:id="@+id/tPengiriman"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Pengiriman"
-        android:textSize="15sp"
-        android:fontFamily="@font/productsans_bold"
-        android:textColor="#404040"
-        app:layout_constraintTop_toBottomOf="@id/v1"
-        android:layout_marginTop="12dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+                <TextView
+                    android:id="@+id/tPengiriman"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginEnd="16dp"
+                    android:fontFamily="@font/productsans_bold"
+                    android:text="Pengiriman"
+                    android:textColor="#404040"
+                    android:textSize="15sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/v1" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginHorizontal="16dp">
+
+                    <EditText
+                        android:layout_width="wrap_content"
+                        android:layout_height="50dp"
+                        android:layout_weight="0.6"
+                        android:id="@+id/et_kodepos"
+                        android:background="@drawable/custom_input"
+                        android:layout_marginTop="8dp"
+                        android:hint="Masukkan Kode Post"
+                        android:paddingLeft="12dp"
+                        android:paddingVertical="6dp"
+                        android:textSize="15sp"
+                        android:inputType="number"
+                        android:maxLines="3"/>
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/btn_cek_ongkir"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginVertical="5dp"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.4"
+                        android:paddingVertical="12dp"
+                        android:text="Cek"
+                        android:textAllCaps="false"
+                        android:textColor="@color/white"
+                        android:textSize="18sp"
+                        android:fontFamily="@font/productsans_medium"
+                        android:background="@drawable/bg_buttton_green"/>
+
+                </LinearLayout>
 
         <RadioGroup
+            android:visibility="gone"
             android:id="@+id/radioGroup_ongkir"
             android:layout_width="match_parent"
             android:orientation="horizontal"
@@ -278,6 +316,41 @@
         android:fontFamily="@font/productsans_bold"/>
 
             </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="12dp">
+                    <TextView
+                        android:id="@+id/tEstimasi"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.4"
+                        android:layout_marginHorizontal="16dp"
+                        android:text="Estimasi Pengiriman"
+                        android:textSize="15sp"
+                        android:textColor="#404040"
+                        app:layout_constraintTop_toBottomOf="@+id/linear1"
+                        app:layout_constraintStart_toStartOf="parent"
+                        android:fontFamily="@font/productsans_medium"/>
+
+                    <TextView
+                        android:id="@+id/txt_estimasi"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.6"
+                        android:layout_marginHorizontal="16dp"
+                        android:text="... hari"
+                        android:textSize="15sp"
+                        android:textColor="@color/primaryGreen"
+                        android:textAlignment="textEnd"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginEnd="16dp"
+                        android:fontFamily="@font/productsans_bold"/>
+
+                </LinearLayout>
+
             </LinearLayout>
 
     <View
